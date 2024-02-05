@@ -16,7 +16,7 @@ w_h_o = np.random.uniform(-0.5, 0.5, (2, 4))
 b_i_h = np.zeros((4, 1))
 b_h_o = np.zeros((2, 1))
 
-learn_rate = 0.01
+learn_rate = 0.05
 nr_correct = 0
 epochs = 3
 maxim = 100

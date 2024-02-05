@@ -3,7 +3,7 @@ import pathlib
 import matplotlib.pyplot as plt
 import math
 
-function = lambda x : (np.sin(x / 5) * 50) + 50
+function = lambda x : (np.cos(x/15) * 50) + 50
 
 def get_mnist():
 
