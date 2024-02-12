@@ -18,9 +18,12 @@ b_h_o = np.zeros((2, 1))
 
 learn_rate = 0.05
 nr_correct = 0
-epochs = 3
+epochs = 10
 maxim = 100
 minum = 0
+
+database = []
+
 for epoch in range(epochs):
     for p, l in zip(points, labels):
         p = np.transpose([p])
@@ -54,11 +57,16 @@ for epoch in range(epochs):
         w_i_h += -learn_rate * delta_h @ np.transpose(p)
         b_i_h += -learn_rate * delta_h
     # Show accuracy for this epoch
+    acc = round((nr_correct / len(points)) * 100,2)
     print(f"Acc: {round((nr_correct / len(points)) * 100, 2)}%")
     nr_correct = 0
+    database.append(acc)
 
 count = 0
 loop = 100
+
+figure, axis = plt.subplots(1, 2)
+
 # Show results
 for x in range(loop):
     point = np.transpose(np.random.uniform(0, 100, size=(1,2)).astype(int))
@@ -87,10 +95,16 @@ for x in range(loop):
         count += 1
 
     x = np.linspace(0, 100, 1000)
-    plt.plot(x, data.function(x))
-
-    plt.scatter(point[0][0], point[1][0], color=colour)
+    axis[0].plot(x, data.function(x))
+    axis[0].scatter(point[0][0], point[1][0], color=colour)
+    axis[0].set_title("Function")
 
 accuracy = (count / loop) * 100
 print(f'accuracy : {accuracy}')
+
+axis[1].plot([i+1 for i in range(epochs)], database)
+axis[1].set_title("Accuracy")
+axis[1].set_ylabel("Accuracy")
+axis[1].set_xlabel("epoch")
+
 plt.show()
